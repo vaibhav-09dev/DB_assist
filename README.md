@@ -14,42 +14,13 @@ DBAssist is an **agentic AI database assistant** that allows users to interact w
 - 💬 Context-aware responses
 - ⚡ Modular node-based architecture
 
-## 🏗️ Architecture
+## 💬 Example
 
-```text
-User Question
-      │
-      ▼
-┌───────────────┐
-│ Schema Node   │
-│ Get DB Schema │
-└───────┬───────┘
-        │
-        ▼
-┌───────────────┐
-│   SQL Node    │
-│ Generate SQL  │
-└───────┬───────┘
-        │
-        ▼
-┌────────────────┐
-│ Validate Node  │
-│ Validate SQL   │
-└───────┬────────┘
-        │
-    Valid?
-     /   \
-   No     Yes
-   │       │
-   ▼       ▼
- Retry   Execute
-           │
-           ▼
-     ┌─────────────┐
-     │ Answer Node │
-     │ Generate    │
-     │ Response    │
-     └──────┬──────┘
-            │
-            ▼
-          Answer
+**User:**
+> Show me all products in the Electronics category.
+
+**Generated SQL:**
+```sql
+SELECT *
+FROM products
+WHERE category = 'Electronics';
