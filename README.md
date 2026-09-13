@@ -14,3 +14,58 @@ DBAssist is an **agentic AI database assistant** that allows users to interact w
 - 💬 Context-aware responses
 - ⚡ Modular node-based architecture
 
+## 🏗️ Architecture
+
+DB Assist follows a **tool-calling agent architecture** with short-term conversational context.
+
+```text
+                    ┌──────────────────────┐
+                    │      User Query      │
+                    └──────────┬───────────┘
+                               │
+                               ▼
+                  ┌─────────────────────────┐
+                  │     Context Builder     │
+                  │                         │
+                  │ • System Prompt         │
+                  │ • Previous Messages     │
+                  │ • Current Question      │
+                  └────────────┬────────────┘
+                               │
+                               ▼
+                      ┌────────────────┐
+                      │     Qwen3      │
+                      │   via Ollama   │
+                      └───────┬────────┘
+                              │
+                       Tool Selection
+                              │
+              ┌───────────────┼────────────────┐
+              │               │                │
+              ▼               ▼                ▼
+       ┌─────────────┐ ┌──────────────┐ ┌──────────────┐
+       │ get_schema  │ │ validate_sql │ │ execute_sql  │
+       └──────┬──────┘ └──────┬───────┘ └──────┬───────┘
+              │               │                │
+              └───────────────┴────────────────┘
+                              │
+                              ▼
+                     ┌──────────────────┐
+                     │   PostgreSQL DB  │
+                     └────────┬─────────┘
+                              │
+                              ▼
+                     ┌──────────────────┐
+                     │   Query Result   │
+                     └────────┬─────────┘
+                              │
+                              ▼
+                      ┌────────────────┐
+                      │     Qwen3      │
+                      │ Final Response │
+                      └───────┬────────┘
+                              │
+                              ▼
+                       ┌──────────────┐
+                       │     User     │
+                       └──────────────┘
